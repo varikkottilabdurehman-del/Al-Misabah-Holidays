@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al Misbah - Tours & Travels</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Outfit & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            teal: '#0D9488',     /* Primary teal */
+                            tealDark: '#0F766E',
+                            orange: '#F97316',   /* Accent vibrant orange */
+                            orangeHover: '#EA580C',
+                            navy: '#0F172A',     /* Dark text & dark sections */
+                            sand: '#FDFBF7',     /* Warm background */
+                            gold: '#F59E0B'
+                        }
+                    },
+                    fontFamily: {
+                        outfit: ['Outfit', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FDFBF7;
+            color: #0F172A;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+        /* Custom Glassmorphism Effects */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .glass-dark {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .hero-slide {
+            transition: opacity 1s ease-in-out;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FDFBF7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0D9488;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen flex flex-col justify-between">
+
+    <!-- ================= HEADER / NAVBAR ================= -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="max-w-4xl mx-auto flex items-center justify-between glass-panel rounded-full px-6 py-2.5 shadow-lg">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center font-bold text-xl shadow-md">
+                        <i class="fa-solid fa-kaaba"></i>
+                    </div>
+                    <span class="text-2xl font-extrabold text-slate-900 font-heading">
+                        Al Misbah <span class="text-teal-600">Holidays</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8 font-medium text-slate-700 text-sm">
+                    <a href="#hero" class="hover:text-brand-teal transition-colors">Home</a>
+                    <a href="#destinations" class="hover:text-brand-teal transition-colors">Destinations</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="#destinations" class="bg-brand-orange hover:bg-brand-orangeHover text-white px-5 py-2.5 rounded-full font-semibold text-sm shadow-md transition-all transform hover:-translate-y-0.5">
+                        Book Now
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-slate-700 hover:text-brand-teal focus:outline-none p-1">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden max-w-7xl mx-auto px-4 mt-2">
+            <div class="glass-panel rounded-2xl p-6 shadow-2xl flex flex-col gap-4 text-center font-medium">
+                <a href="#hero" class="mobile-link text-slate-700 hover:text-brand-teal py-2 border-b border-gray-100">Home</a>
+                <a href="#destinations" class="mobile-link text-slate-700 hover:text-brand-teal py-2">Destinations</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= 1. HERO SECTION & SEARCH ================= -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden">
+        <!-- Background Slider Images -->
+        <div class="absolute inset-0 z-0">
+            <div class="hero-slide absolute inset-0 opacity-100 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80');"></div>
+            <div class="hero-slide absolute inset-0 opacity-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80');"></div>
+            <div class="hero-slide absolute inset-0 opacity-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=2000&q=80');"></div>
+            <!-- Overlay Gradient -->
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-navy/90 via-brand-navy/40 to-brand-navy/60"></div>
+        </div>
+
+        <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-8">
+            <span class="inline-block bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold tracking-wider uppercase mb-4 text-orange-300 border border-white/20 shadow-sm">
+                 Start Your Journey Today
+            </span>
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold font-heading tracking-tight leading-tight mb-6 drop-shadow-md">
+                Explore The India's <br class="hidden sm:inline"><span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-orange-300 to-amber-300">Best Destinations</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-base sm:text-lg text-slate-200 mb-10 font-light">
+                Discover breathtaking places, tailored itineraries, luxury stays, and unforgettable adventures curated just for you.
+            </p>
+
+            <!-- Interactive Search/Booking Widget -->
+            <div class="max-w-5xl mx-auto glass-panel rounded-3xl p-4 sm:p-6 shadow-2xl text-slate-800 text-left">
+                <!-- Search Tabs -->
+                <div class="flex border-b border-gray-200/60 pb-3 mb-5 gap-4 overflow-x-auto">
+                    <button class="tab-btn flex items-center gap-2 pb-2 border-b-2 border-brand-orange text-brand-orange font-semibold text-sm sm:text-base whitespace-nowrap" onclick="switchSearchTab(this, 'all')">
+                        <i class="fa-solid fa-plane-departure"></i> All Trips
+                    </button>
+                </div>
+
+                <!-- Search Input Grid -->
+                <form onsubmit="handleSearch(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+                    <!-- Destination Updated with Correct Locations -->
+                    <div class="flex flex-col">
+                        <label class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1 flex items-center gap-1">
+                            <i class="fa-solid fa-location-dot text-brand-teal"></i> Destination
+                        </label>
+                        <select id="search-destination" required class="w-full bg-white/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 text-sm font-medium focus:ring-2 focus:ring-brand-teal focus:outline-none">
+                            <option value="">Select Destination</option>
+                            <option value="Kashmir">Kashmir, India</option>
+                            <option value="Delhi">Delhi, India</option>
+                            <option value="Ajmer">Ajmer, India</option>
+                            <option value="Kolkata">Kolkata, India</option>
+                            <option value="Sikkim">Sikkim, India</option>
+                        </select>
+                    </div>
+
+                    <!-- Dates -->
+                    <div class="flex flex-col">
+                        <label class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1 flex items-center gap-1">
+                            <i class="fa-solid fa-calendar-days text-brand-teal"></i> Travel Date
+                        </label>
+                        <div class="relative">
+                            <input type="date" required id="search-date" class="w-full bg-white/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 text-sm font-medium focus:outline-none focus:border-brand-teal cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Guests & Travel Type -->
+                    <div class="flex flex-col">
+                        <label class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1 flex items-center gap-1">
+                            <i class="fa-solid fa-user-group text-brand-teal"></i> Guests & Style
+                        </label>
+                        <select id="search-guests" class="w-full bg-white/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 text-sm font-medium focus:outline-none focus:border-brand-teal cursor-pointer">
+                            <option value="" disabled selected>Select Style</option>
+                            <option value="2 Guests">2 Adults (Honeymoon/Couple)</option>
+                            <option value="1 Guest">Solo Traveler</option>
+                            <option value="4 Guests">Family (4 Members)</option>
+                            <option value="Group">Group Adventure (5+)</option>
+                        </select>
+                    </div>
+
+                    <!-- Search Button -->
+                    <button type="submit" class="w-full bg-brand-orange hover:bg-brand-orangeHover text-white font-bold py-3 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 transform active:scale-95">
+                        <i class="fa-solid fa-magnifying-glass"></i> Search Packages
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 2. POPULAR DESTINATIONS GRID ================= -->
+    <section id="destinations" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div>
+                <span class="text-brand-teal font-bold uppercase tracking-wider text-sm">Top Rated Spots</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy font-heading mt-1">Popular Destinations</h2>
+            </div>
+            <p class="text-slate-500 max-w-md mt-2 md:mt-0 font-light">
+                Hand-selected destinations favored by travelers worldwide for their unmatched beauty and rich experiences.
+            </p>
+        </div>
+
+        <!-- Destination Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Card 1: Kashmir -->
+            <div class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between border border-slate-100">
+                <div class="relative overflow-hidden h-64">
+                    <img src="https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&w=800&q=80" alt="Kashmir Shikara Ride" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full">
+                        <i class="fa-solid fa-clock text-brand-gold"></i> 6 Days / 5 Nights
+                    </span>
+                    <span class="absolute top-4 right-4 bg-brand-orange text-white text-xs font-extrabold px-3 py-1.5 rounded-full shadow-md">
+                        ₹18,500 / person
+                    </span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wide text-brand-teal">Heaven On Earth</span>
+                            <div class="flex items-center text-amber-400 text-xs">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                <span class="text-slate-500 font-semibold ml-1">(4.9)</span>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-brand-navy group-hover:text-brand-teal transition-colors">Kashmir Paradise Tour</h3>
+                        <p class="text-slate-500 text-sm mt-2 line-clamp-2">Enjoy View of Sri Nagar, Gulmarg, Pahalgam valleys, Sonamarg, Waga, Amritsar.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs text-slate-400 font-medium"><i class="fa-solid fa-house-chimney text-slate-400 mr-1"></i> Shikkara Ride Included</span>
+                        <button onclick="openBookingModal('Kashmir Paradise Tour', '₹18,500', 'https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&w=800&q=80')" class="bg-brand-teal hover:bg-brand-tealDark text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md transition-all">
+                            Explore Package
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Delhi -->
+            <div class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between border border-slate-100">
+                <div class="relative overflow-hidden h-64">
+                    <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=800&q=80" alt="Delhi" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full">
+                        <i class="fa-solid fa-clock text-brand-gold"></i> 4 Days / 3 Nights
+                    </span>
+                    <span class="absolute top-4 right-4 bg-brand-orange text-white text-xs font-extrabold px-3 py-1.5 rounded-full shadow-md">
+                        ₹10,500 / person
+                    </span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wide text-brand-teal">Heritage & Culture</span>
+                            <div class="flex items-center text-amber-400 text-xs">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                                <span class="text-slate-500 font-semibold ml-1">(4.8)</span>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-brand-navy group-hover:text-brand-teal transition-colors">Historical Delhi Exploration</h3>
+                        <p class="text-slate-500 text-sm mt-2 line-clamp-2">Visit Ajmer, Delhi, Red Fort, Qutub Minar, India Gate, Nizamuddin Aulia Dargah, and Agra.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs text-slate-400 font-medium"><i class="fa-solid fa-car text-slate-400 mr-1"></i> AC Cab & Guide</span>
+                        <button onclick="openBookingModal('Historical Delhi Exploration', '₹10,500', 'https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=800&q=80')" class="bg-brand-teal hover:bg-brand-tealDark text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md transition-all">
+                            Explore Package
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Ajmer & Kashmir -->
+            <div class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between border border-slate-100">
+                <div class="relative overflow-hidden h-64">
+                    <img src="https://imagepaste.org/i/d9y9nbw5.png" alt="Ajmer Sharif Dargah" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <span class="absolute top-4 left-4 bg-white text-slate-900 text-xs font-bold px-3.5 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
+                        <i class="fa-solid fa-clock text-slate-700"></i> 3 Days / 2 Nights
+                    </span>
+                    <span class="absolute top-4 right-4 bg-brand-orange text-white text-xs font-extrabold px-3 py-1.5 rounded-full shadow-md">
+                        ₹8,000 / person
+                    </span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wide text-brand-teal">Spiritual Pilgrimage</span>
+                            <div class="flex items-center text-amber-400 text-xs">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                <span class="text-slate-500 font-semibold ml-1">(5.0)</span>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-brand-navy group-hover:text-brand-teal transition-colors">Ajmer & Kashmir Exploration</h3>
+                        <p class="text-slate-500 text-sm mt-2 line-clamp-2">Blessed Ziyarat of Khwaja Garib Nawaz (R.A.) Dargah, Delhi, Agra, Sri Nagar, Gulmarg, Pahalgam valleys.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs text-slate-400 font-medium"><i class="fa-solid fa-hotel text-slate-400 mr-1"></i> Near Dargah Hotel</span>
+                        <button onclick="openBookingModal('Ajmer & Kashmir Exploration', '₹8,000', 'https://imagepaste.org/i/d9y9nbw5.png')" class="bg-brand-teal hover:bg-brand-tealDark text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md transition-all">
+    Explore Package
+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 4: kolkata - Sikkim -->
+            <div class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between border border-slate-100">
+                <div class="relative overflow-hidden h-64">
+                    <img src="https://c.ndtvimg.com/2025-11/71epi1rk_sikkim_625x300_25_November_25.jpg?im=FeatureCrop,algorithm=dnn,width=1600,height=900" alt="Sikkim" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <span class="absolute top-4 left-4 bg-white text-slate-900 text-xs font-bold px-3.5 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
+                        <i class="fa-solid fa-clock text-slate-700"></i> 3 Days / 2 Nights
+                    </span>
+                    <span class="absolute top-4 right-4 bg-brand-orange text-white text-xs font-extrabold px-3 py-1.5 rounded-full shadow-md">
+                        ₹8,000 / person
+                    </span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wide text-brand-teal">Heritage & Culture</span>
+                            <div class="flex items-center text-amber-400 text-xs">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                <span class="text-slate-500 font-semibold ml-1">(5.0)</span>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-brand-navy group-hover:text-brand-teal transition-colors">Kolkata & Sikkim Tour</h3>
+                        <p class="text-slate-500 text-sm mt-2 line-clamp-2">Enjoy Darjeeling, Gangtok, Nathula Pass, Hyderabad, Howrah.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs text-slate-400 font-medium"><i class="fa-solid fa-hotel text-slate-400 mr-1"></i> Stay in Hotel </span>
+                        <button onclick="openBookingModal('Kolkata & Sikkim Tour', '₹8,000', 'https://c.ndtvimg.com/2025-11/71epi1rk_sikkim_625x300_25_November_25.jpg?im=FeatureCrop,algorithm=dnn,width=1600,height=900')" class="bg-brand-teal hover:bg-brand-tealDark text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md transition-all">
+                            Explore Package
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= 4. WHY CHOOSE US / AGENCY HIGHLIGHTS ================= -->
+    <section id="why-us" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="text-brand-teal font-bold uppercase tracking-wider text-sm">Why Book With Us</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy font-heading mt-1">We Make Travel Effortless & Unforgettable</h2>
+        </div>
+
+        <!-- Benefits Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
+            <!-- Benefit 1: Delicious Food -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all text-center flex flex-col items-center">
+                <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl mb-4">
+                    <i class="fa-solid fa-utensils"></i>
+                </div>
+                <h3 class="text-base font-bold text-brand-navy mb-2">Delicious Food</h3>
+                <p class="text-xs text-slate-500 leading-relaxed">Hygienic, authentic local meals and complimentary breakfast included throughout your journey.</p>
+            </div>
+
+            <!-- Benefit 2: Guided Sightseeing -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all text-center flex flex-col items-center">
+                <div class="w-12 h-12 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center text-xl mb-4">
+                    <i class="fa-solid fa-binoculars"></i>
+                </div>
+                <h3 class="text-base font-bold text-brand-navy mb-2">Guided Sightseeing</h3>
+                <p class="text-xs text-slate-500 leading-relaxed">Curated tours to famous heritage sites, shrines, and natural landscapes with local guides.</p>
+            </div>
+
+            <!-- Benefit 3: Best Price Guarantee -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all text-center flex flex-col items-center">
+                <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl mb-4">
+                    <i class="fa-solid fa-tags"></i>
+                </div>
+                <h3 class="text-base font-bold text-brand-navy mb-2">Best Price Guarantee</h3>
+                <p class="text-xs text-slate-500 leading-relaxed">We match verified deals to ensure you get luxury holiday experiences at competitive rates.</p>
+            </div>
+
+            <!-- Benefit 4: 24/7 Personal Concierge -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all text-center flex flex-col items-center">
+                <div class="w-12 h-12 rounded-xl bg-orange-50 text-brand-orange flex items-center justify-center text-xl mb-4">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <h3 class="text-base font-bold text-brand-navy mb-2">24/7 Personal Support</h3>
+                <p class="text-xs text-slate-500 leading-relaxed">Dedicated trip managers assist you before, during, and after your trip whenever required.</p>
+            </div>
+
+            <!-- Benefit 5: 100% Safe Booking -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all text-center flex flex-col items-center">
+                <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center text-xl mb-4">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 class="text-base font-bold text-brand-navy mb-2">100% Safe Booking</h3>
+                <p class="text-xs text-slate-500 leading-relaxed">Verified itineraries, transparent booking terms, and complete safety assurance for families.</p>
+            </div>
+
+            <!-- Benefit 6: Handpicked Hotels -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all text-center flex flex-col items-center">
+                <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl mb-4">
+                    <i class="fa-solid fa-hotel"></i>
+                </div>
+                <h3 class="text-base font-bold text-brand-navy mb-2">Handpicked Hotels</h3>
+                <p class="text-xs text-slate-500 leading-relaxed">Every resort and hotel in our package passes strict cleanliness and comfort checks.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 6. TESTIMONIALS & REVIEWS ================= -->
+    <section id="reviews" class="py-20 bg-brand-navy text-white relative overflow-hidden">
+        <!-- Glow Effect Background -->
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand-teal/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-brand-orange/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-orange font-bold uppercase tracking-wider text-sm">Real Travel Stories</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold font-heading mt-1">What Our Explorers Say</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="glass-dark p-8 rounded-3xl border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm italic font-light">"It was a Wonderful Journey."</p>
+                    </div>
+                    <div class="flex items-center gap-4 mt-6 pt-6 border-t border-white/10">
+                        
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Sophia & Liam</h4>
+                            <span class="text-xs text-slate-400">Traveled to Kashmir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass-dark p-8 rounded-3xl border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm italic font-light">"It was Amazing Journey,it was Unforgettable."</p>
+                    </div>
+                    <div class="flex items-center gap-4 mt-6 pt-6 border-t border-white/10">
+                       
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Marcus Vance</h4>
+                            <span class="text-xs text-slate-400">Traveled to Kolkata</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="glass-dark p-8 rounded-3xl border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm italic font-light">"I never Experienced this much Journey"</p>
+                    </div>
+                    <div class="flex items-center gap-4 mt-6 pt-6 border-t border-white/10">
+                       
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Elena Rostova</h4>
+                            <span class="text-xs text-slate-400">Traveled to Delhi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 7. NEWSLETTER CTA (WhatsApp Update) ================= -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mb-20 relative z-20 mt-12">
+        <div class="bg-gradient-to-r from-brand-teal to-teal-800 rounded-3xl p-8 sm:p-12 shadow-2xl text-white flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div class="max-w-xl">
+                <span class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Exclusive Deals</span>
+                <h3 class="text-2xl sm:text-4xl font-extrabold font-heading mt-2">Get Fastest Booking From Here!</h3>
+                <p class="text-teal-100 text-sm mt-2 font-light">Send your travel queries directly to our WhatsApp and get instant replies.</p>
+            </div>
+            <!-- Updated Form for WhatsApp Redirect -->
+            <form onsubmit="handleWhatsAppQuery(event)" class="w-full lg:w-auto flex flex-col sm:flex-row gap-3">
+                <input type="text" id="wa-query-text" required placeholder="Enter your query..." class="px-5 py-3.5 rounded-xl text-slate-800 text-sm focus:outline-none w-full sm:w-80 shadow-md">
+                <button type="submit" class="bg-brand-orange hover:bg-brand-orangeHover text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition-colors whitespace-nowrap flex items-center justify-center gap-2">
+                   <i class="fa-brands fa-whatsapp text-lg"></i> Send via WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-slate-900 text-slate-400 pt-36 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+            
+            <!-- Brand Info -->
+            <div class="lg:col-span-2">
+                <a href="#" class="flex items-center gap-2 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center font-bold text-lg shadow-md">
+                        <i class="fa-solid fa-kaaba"></i>
+                    </div>
+                    <span class="text-2xl font-extrabold text-white tracking-tight font-heading">
+                        Al Misbah <span class="text-teal-500">Holidays</span>
+                    </span>
+                </a>
+                <p class="text-sm font-light text-slate-400 mb-6 max-w-sm">
+                    Crafting premium bespoke travel packages and unforgettable life experiences across India since 2000.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-brand-teal text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-brand-teal text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-brand-teal text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-brand-teal text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <!-- Links Column 1 -->
+            <div>
+                <h4 class="text-white font-bold text-sm mb-4 font-heading uppercase tracking-wider">Quick Links</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="#destinations" class="hover:text-white transition-colors">Popular Spots</a></li>
+                    <li><a href="#why-us" class="hover:text-white transition-colors">About Agency</a></li>
+                    <li><a href="#reviews" class="hover:text-white transition-colors">Customer Reviews</a></li>
+                </ul>
+            </div>
+
+            <!-- Links Column 2 -->
+            <div>
+                <h4 class="text-white font-bold text-sm mb-4 font-heading uppercase tracking-wider">Destinations</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="#" class="hover:text-white transition-colors">Ajmer, India</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Kashmir, India</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Ajmer & Kashmir</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Kolkata & Sikkim</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Column -->
+            <div>
+                <h4 class="text-white font-bold text-sm mb-4 font-heading uppercase tracking-wider">Contact Us</h4>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-location-dot text-brand-teal"></i>
+                        <span>KPM COMPLEX, KOHINOOR, MALAPPURAM 673635, INDIA </span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-phone text-brand-teal"></i>
+                        <span>+91 9847 8242 80 </span> 
+                        <span>+91 944 699 2738 </span>
+                        
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-envelope text-brand-teal"></i>
+                        <span>md.am.group@gmail.com</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+            <p>&copy; 2026 Al-Misbah Holidays Travel Agency LLC. All Rights Reserved.</p>
+            <div class="flex gap-6 mt-4 sm:mt-0">
+                <a href="#" class="hover:underline">Privacy Policy</a>
+                <a href="#" class="hover:underline">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= 5. INTERACTIVE BOOKING / ITINERARY MODAL ================= -->
+    <div id="booking-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-brand-navy/80 backdrop-blur-sm animate-fade-in">
+        <div class="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl border border-slate-100 flex flex-col max-h-[90vh]">
+            
+            <!-- Modal Header -->
+            <div class="relative h-48 bg-slate-800 text-white flex items-end p-6" id="modal-hero-bg">
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-navy/90 via-transparent to-black/30"></div>
+                <button onclick="closeBookingModal()" class="absolute top-4 right-4 bg-white/20 hover:bg-white/40 text-white w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-md transition-colors z-20">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+                <div class="relative z-10">
+                    <span class="bg-brand-orange text-white text-xs font-bold px-2.5 py-1 rounded-md uppercase" id="modal-package-price">$899 / person</span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold font-heading mt-2" id="modal-package-title">Bali & Ubud Escape</h3>
+                </div>
+            </div>
+
+            <!-- Modal Content (Scrollable) -->
+            <div class="p-6 overflow-y-auto space-y-6">
+                <!-- Itinerary Overview -->
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-brand-teal mb-3">Package Overview</h4>
+                    <p class="text-sm text-slate-600">You are about to request a booking for this amazing package. Our travel agents will assist you shortly on WhatsApp to confirm your itinerary and customize it based on your needs.</p>
+                </div>
+
+                <hr class="border-slate-100">
+
+                <!-- Interactive Booking Form -->
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-brand-teal mb-3">Reserve Your Spot</h4>
+                    <form onsubmit="handleModalSubmit(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-xs font-bold text-slate-500 mb-1 block">Full Name</label>
+                            <input type="text" id="modal-name" required placeholder="Enter your full name" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-brand-teal focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-slate-500 mb-1 block">Email Address</label>
+                            <input type="email" id="modal-email" required placeholder="example@gmail.com" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-brand-teal focus:outline-none">
+                        </div>
+                        <!-- New WhatsApp input block -->
+                        <div>
+                            <label class="text-xs font-bold text-slate-500 mb-1 block">WhatsApp Number</label>
+                            <input type="tel" id="modal-wa" required placeholder="+91 xxxxxxxxxx" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-brand-teal focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-slate-500 mb-1 block">Travel Date</label>
+                            <input type="date" id="modal-date" required class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-brand-teal focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-slate-500 mb-1 block">Number of Guests</label>
+                            <select id="modal-guests" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-brand-teal focus:outline-none">
+                                <option value="1 Guest">1 Adult</option>
+                                <option value="2 Guests" selected>2 Adults</option>
+                                <option value="3 Guests">3 Adults</option>
+                                <option value="4 Guests">Family (4 Members)</option>
+                                <option value="Group">4+ Group</option>
+                            </select>
+                        </div>
+                        <div class="sm:col-span-2 mt-2">
+                            <button type="submit" class="w-full bg-brand-orange hover:bg-brand-orangeHover text-white font-bold py-3 rounded-xl shadow-lg transition-colors text-sm flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-lg"></i> Confirm & Send via WhatsApp
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Notification Toast Popup -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden bg-brand-navy text-white px-6 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border border-white/10 text-sm font-medium transition-all">
+        <i class="fa-solid fa-circle-check text-brand-teal text-lg"></i>
+        <span id="toast-message">Action successful!</span>
+    </div>
+
+    <!-- ================= JAVASCRIPT INTERACTIVITY ================= -->
+    <script>
+        // Hero Image Carousel Logic
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+
+        function cycleHeroSlides() {
+            slides[currentSlide].style.opacity = '0';
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].style.opacity = '1';
+        }
+        setInterval(cycleHeroSlides, 5000);
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Search Tab Switcher
+        function switchSearchTab(button, category) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-brand-orange', 'text-brand-orange');
+                btn.classList.add('border-transparent', 'text-slate-500');
+            });
+            button.classList.remove('border-transparent', 'text-slate-500');
+            button.classList.add('border-brand-orange', 'text-brand-orange');
+        }
+
+        // Booking Modal Logic
+        const bookingModal = document.getElementById('booking-modal');
+        const modalTitle = document.getElementById('modal-package-title');
+        const modalPrice = document.getElementById('modal-package-price');
+        const modalBg = document.getElementById('modal-hero-bg');
+
+        function openBookingModal(title, price, imgUrl) {
+            modalTitle.textContent = title;
+            modalPrice.textContent = price + ' / person';
+            modalBg.style.backgroundImage = `linear-gradient(to top, rgba(15,23,42,0.9), transparent), url('${imgUrl}')`;
+            modalBg.style.backgroundSize = 'cover';
+            modalBg.style.backgroundPosition = 'center';
+            
+            bookingModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBookingModal() {
+            bookingModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close Modal when clicking backdrop
+        bookingModal.addEventListener('click', (e) => {
+            if (e.target === bookingModal) {
+                closeBookingModal();
+            }
+        });
+
+        // Search Form Handling -> Opens Dynamic Modal Updated with Only Target Spots
+        function handleSearch(e) {
+            e.preventDefault();
+            
+            const destInput = document.getElementById('search-destination').value;
+            const dateInput = document.getElementById('search-date').value;
+            const guestsInput = document.getElementById('search-guests').value;
+
+            // Mapping corresponding to the new dropdown and 'Top Rated Spots' cards
+            const packageMapping = {
+                'Kashmir': { 
+                    title: 'Kashmir Paradise Tour', 
+                    price: '₹18,500', 
+                    imgUrl: 'https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&w=800&q=80' 
+                },
+                'Delhi': { 
+                    title: 'Historical Delhi Exploration', 
+                    price: '₹10,500', 
+                    imgUrl: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=800&q=80' 
+                },
+                'Ajmer': { 
+                    title: 'Ajmer & Kashmir Exploration', 
+                    price: '₹8,000', 
+                    imgUrl: 'https://imagepaste.org/i/d9y9nbw5.png' 
+                },
+                'Kolkata': { 
+                    title: 'Kolkata & Sikkim Tour', 
+                    price: '₹8,000', 
+                    imgUrl: 'https://c.ndtvimg.com/2025-11/71epi1rk_sikkim_625x300_25_November_25.jpg?im=FeatureCrop,algorithm=dnn,width=1600,height=900' 
+                },
+                'Sikkim': { 
+                    title: 'Kolkata & Sikkim Tour', 
+                    price: '₹8,000', 
+                    imgUrl: 'https://c.ndtvimg.com/2025-11/71epi1rk_sikkim_625x300_25_November_25.jpg?im=FeatureCrop,algorithm=dnn,width=1600,height=900' 
+                }
+            };
+
+            // Get selected package or a fallback default
+            const selectedPackage = packageMapping[destInput] || {
+                title: destInput + ' Premium Package',
+                price: 'Ask for Price',
+                imgUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'
+            };
+
+            // Open Modal
+            openBookingModal(selectedPackage.title, selectedPackage.price, selectedPackage.imgUrl);
+
+            // Pre-fill the modal with search data
+            if (dateInput) {
+                document.getElementById('modal-date').value = dateInput;
+            }
+            if (guestsInput) {
+                const guestSelect = document.getElementById('modal-guests');
+                for (let i = 0; i < guestSelect.options.length; i++) {
+                    if (guestSelect.options[i].value === guestsInput || guestSelect.options[i].text === guestsInput) {
+                        guestSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Modal Booking Submit -> Redirects to WhatsApp
+        function handleModalSubmit(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('modal-name').value;
+            const email = document.getElementById('modal-email').value;
+            const wa = document.getElementById('modal-wa').value;
+            const date = document.getElementById('modal-date').value;
+            const guests = document.getElementById('modal-guests').value;
+            const packageTitle = document.getElementById('modal-package-title').innerText;
+
+            const message = `Hi, I would like to book a package.\nPackage: ${packageTitle}\nName: ${name}\nEmail: ${email}\nWhatsApp: ${wa}\nDate: ${date}\nGuests: ${guests}`;
+            const waUrl = `https://wa.me/919843423485?text=${encodeURIComponent(message)}`;
+            
+            window.open(waUrl, '_blank');
+            closeBookingModal();
+            showToast('Booking request sent! Please continue on WhatsApp.');
+        }
+
+        // Newsletter Submit -> Redirects to WhatsApp Query
+        function handleWhatsAppQuery(e) {
+            e.preventDefault();
+            const queryText = document.getElementById('wa-query-text').value;
+            
+            const message = `${queryText}`;
+            const waUrl = `https://wa.me/918943423485?text=${encodeURIComponent(message)}`;
+            
+            window.open(waUrl, '_blank');
+            e.target.reset();
+            showToast('Redirecting your query to WhatsApp...');
+        }
+
+        // Toast Notification System
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = msg;
+            toast.classList.remove('hidden');
+            
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
